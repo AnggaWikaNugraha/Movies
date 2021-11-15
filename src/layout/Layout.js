@@ -3,11 +3,16 @@ import Header from '../components/Header'
 
 const Layout = ({
     children,
-    type
+    type,
+    setsearch,
+    search
 }) => {
     return (
         <>
-            <Header type={type}></Header>
+            <Header
+                setsearch={setsearch}
+                search={search}
+                type={type}></Header>
             {children}
         </>
     )
