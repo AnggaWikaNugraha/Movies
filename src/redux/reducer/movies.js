@@ -6,7 +6,7 @@ let initialState = {
         movie: {}
     },
     params: {
-        search: '',
+        search: 'Batman',
         page: 1
     }
 }

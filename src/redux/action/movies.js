@@ -1,10 +1,10 @@
 import { Movies } from '../api/movies'
 import { SEARCH_MOVIE, GET_MOVIE, GET_MOVIES } from '../type/movies'
 
-export const actionGetMovies = (type, search) => async (dispatch) => {
+export const actionGetMovies = (type, page) => async (dispatch) => {
     try {
 
-        await Movies(type, search).then(res => console.log(res))
+        await Movies(type, page).then(res => console.log(res))
 
     } catch (error) {
 

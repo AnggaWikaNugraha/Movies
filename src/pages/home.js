@@ -3,10 +3,18 @@ import Layout from '../layout/Layout'
 import styled from '@emotion/styled'
 import { Gap } from '../GloblasStyles'
 import { useDispatch, useSelector } from 'react-redux'
+import { actionGetMovies } from '../redux/action/movies'
 
 const Home = () => {
     const dispatch = useDispatch()
     const stateMovies = useSelector(state => state.stateMovies)
+
+    React.useEffect(() => {
+        dispatch(actionGetMovies(
+            stateMovies.params.search,
+            stateMovies.params.page
+        ))
+    }, [dispatch])
 
     return (
         <Layout
