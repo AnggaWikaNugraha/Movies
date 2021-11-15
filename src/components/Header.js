@@ -1,13 +1,17 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { Gap, Input } from '../GloblasStyles'
+import { useDispatch, useSelector } from 'react-redux'
+import { actionSearch } from '../redux/action/movies'
 
 const Header = ({
     type,
     typeNavbar,
-    setsearch,
-    search
 }) => {
+
+    const dispatch = useDispatch()
+    const stateMovies = useSelector(state => state.stateMovies)
+
     switch (typeNavbar) {
 
         default:
@@ -16,9 +20,9 @@ const Header = ({
                     {!type && <Brand><P>Movies</P></Brand>}
                     <WrappSearch>
                         <Gap width={'10px'} />
-                        <Search search={search}>
+                        <Search search={stateMovies.params.search}>
                             <ion-icon name="search-outline"></ion-icon>
-                            <Input onChange={(e) => setsearch(e.target.value)} placeholder='Cari Movies' />
+                            <Input onChange={(e) => dispatch(actionSearch(e.target.value))} placeholder='Cari Movies' />
                         </Search>
                     </WrappSearch>
                 </Navbar>

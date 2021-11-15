@@ -10,8 +10,6 @@ const Layout = ({
     return (
         <>
             <Header
-                setsearch={setsearch}
-                search={search}
                 type={type}></Header>
             {children}
         </>

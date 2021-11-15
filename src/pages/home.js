@@ -2,17 +2,18 @@ import React from 'react'
 import Layout from '../layout/Layout'
 import styled from '@emotion/styled'
 import { Gap } from '../GloblasStyles'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Home = () => {
-    const [search, setsearch] = React.useState('')
+    const dispatch = useDispatch()
+    const stateMovies = useSelector(state => state.stateMovies)
+
     return (
         <Layout
-            search={search}
-            setsearch={setsearch}
-            type={search ? '' : 'noValueSearch'
+            type={stateMovies.params.search ? '' : 'noValueSearch'
             }>
 
-            {!search &&
+            {!stateMovies.params.search &&
                 <Container backgroundColor='black'>
                     <WrapperCard>
                         <Gap height={'50px'} />
