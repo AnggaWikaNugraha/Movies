@@ -1,11 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../layout/Layout'
 import styled from '@emotion/styled'
 import { Gap } from '../GloblasStyles'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory, useParams } from 'react-router-dom'
+import { actionGetOneMovie } from '../redux/action/movies'
 
 const Detail = () => {
     const stateMovies = useSelector(state => state.stateMovies)
+    const { id } = useParams()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(actionGetOneMovie(id))
+    }, [])
 
     return (
         <Layout
@@ -15,28 +23,33 @@ const Detail = () => {
             <Container>
                 <div className='row'>
                     <WrappRow className='col-md-6'>
-                        <img src='https://m.media-amazon.com/images/M/MV5BOTY4YjI2N2MtYmFlMC00ZjcyLTg3YjEtMDQyM2ZjYzQ5YWFkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg' />
+                        <img src={stateMovies.response.movie?.Poster} />
                     </WrappRow>
                     <WrappRow className='col-md-6'>
                         <WrappDetail>
                             <h3>Detail Movie</h3>
-                            <TitleBanner fontWeight={700} fontSize={'16px'}>Title</TitleBanner>
-                            <TitleBanner fontWeight={700} fontSize={'16px'}>Year</TitleBanner>
-                            <TitleBanner fontWeight={700} fontSize={'16px'}>Rated</TitleBanner>
-                            <TitleBanner fontWeight={700} fontSize={'16px'}>Released</TitleBanner>
-                            <TitleBanner fontWeight={700} fontSize={'16px'}>Runtime</TitleBanner>
-                            <TitleBanner fontWeight={700} fontSize={'16px'}>Genre</TitleBanner>
-                            <TitleBanner fontWeight={700} fontSize={'16px'}>Director</TitleBanner>
-                            <TitleBanner fontWeight={700} fontSize={'16px'}>Writer</TitleBanner>
-                            <TitleBanner fontWeight={700} fontSize={'16px'}>Actors</TitleBanner>
-                            <TitleBanner fontWeight={700} fontSize={'16px'}>Language</TitleBanner>
-                            <TitleBanner fontWeight={700} fontSize={'16px'}>Country</TitleBanner>
-                            <TitleBanner fontWeight={700} fontSize={'16px'}>Awards</TitleBanner>
-                            <TitleBanner fontWeight={700} fontSize={'16px'}>plot</TitleBanner>
-                            <TitleBanner fontWeight={700} fontSize={'16px'}>Ratings
+                            <TitleBanner fontWeight={700} fontSize={'14px'}>Title: {stateMovies.response?.movie?.Title}</TitleBanner>
+                            <TitleBanner fontWeight={700} fontSize={'14px'}>Year: {stateMovies.response?.movie?.Year}</TitleBanner>
+                            <TitleBanner fontWeight={700} fontSize={'14px'}>Rated: {stateMovies.response?.movie?.Rated}</TitleBanner>
+                            <TitleBanner fontWeight={700} fontSize={'14px'}>Released: {stateMovies.response?.movie?.Released}</TitleBanner>
+                            <TitleBanner fontWeight={700} fontSize={'14px'}>Runtime: {stateMovies.response?.movie?.Runtime}</TitleBanner>
+                            <TitleBanner fontWeight={700} fontSize={'14px'}>Genre: {stateMovies.response?.movie?.Genre}</TitleBanner>
+                            <TitleBanner fontWeight={700} fontSize={'14px'}>Director: {stateMovies.response?.movie?.Director}</TitleBanner>
+                            <TitleBanner fontWeight={700} fontSize={'14px'}>Writer: {stateMovies.response?.movie?.Writer}</TitleBanner>
+                            <TitleBanner fontWeight={700} fontSize={'14px'}>Actors: {stateMovies.response?.movie?.Actors}</TitleBanner>
+                            <TitleBanner fontWeight={700} fontSize={'14px'}>Language: {stateMovies.response?.movie?.Language}</TitleBanner>
+                            <TitleBanner fontWeight={700} fontSize={'14px'}>Country: {stateMovies.response?.movie?.Country}</TitleBanner>
+                            <TitleBanner fontWeight={700} fontSize={'14px'}>Awards: {stateMovies.response?.movie?.Awards}</TitleBanner>
+                            <TitleBanner fontWeight={700} fontSize={'14px'}>plot: {stateMovies.response?.movie?.Plot}</TitleBanner>
+                            <TitleBanner fontWeight={700} fontSize={'14px'}>Ratings
                                 <ul>
-                                    <li>Source : IMV, value : 9/10</li>
-                                    <li>Source : IMV, value : 9/10</li>
+                                    {
+                                        stateMovies.response?.movie?.Ratings?.map((res, key) => {
+                                            return (
+                                                <li>Source : {res.Source}, value : {res.Value}</li>
+                                            )
+                                        })
+                                    }
 
                                 </ul>
                             </TitleBanner>
@@ -53,7 +66,7 @@ export default Detail
 
 const Container = styled.div`
     width: 100%;
-    height: 95vh;
+    height: 80vh;
     padding: 0 30px 0 30px;
     background-color: black;
 `

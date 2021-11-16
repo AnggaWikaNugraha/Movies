@@ -1,4 +1,4 @@
-import { Movies } from '../api/movies'
+import { Movies, OneMovie } from '../api/movies'
 import { SEARCH_MOVIE, GET_MOVIE, GET_MOVIES, ERROR_GET_MOVIES, SET_PAGE, Error_SET_PAGE } from '../type/movies'
 
 export const actionGetMovies = (type) => async (dispatch, getState) => {
@@ -14,6 +14,25 @@ export const actionGetMovies = (type) => async (dispatch, getState) => {
                 dispatch({
                     type: GET_MOVIES,
                     payload: res.data.Search
+                })
+            }
+        })
+
+    } catch (error) {
+
+    }
+}
+
+export const actionGetOneMovie = (idMovie) => async (dispatch, getState) => {
+    try {
+        await OneMovie(idMovie).then(res => {
+            if (res.data.Response == 'False') {
+                console.log(res.data)
+            }
+            if (res.data.Response == 'True') {
+                dispatch({
+                    type: GET_MOVIE,
+                    payload: res.data
                 })
             }
         })
