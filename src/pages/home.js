@@ -5,6 +5,7 @@ import { actionGetMovies, actionSetPage } from '../redux/action/movies'
 import OnBoard from '../components/OnBoard'
 import styled from '@emotion/styled'
 import { Gap } from '../GloblasStyles'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
     const dispatch = useDispatch()
@@ -49,9 +50,12 @@ const Home = () => {
                                             return (
                                                 <WrapperCard className='col-md-2'>
                                                     <Card className='card'>
-                                                        <CardBody className='card-body'>
-                                                            <img src={res?.Poster} />
-                                                        </CardBody>
+                                                        <Link to={`/detail/`, res.imdbID} state={res.imdbID}>
+                                                            <CardBody className='card-body'>
+                                                                <img src={res?.Poster} />
+
+                                                            </CardBody>
+                                                        </Link>
                                                     </Card>
                                                 </WrapperCard>
                                             )

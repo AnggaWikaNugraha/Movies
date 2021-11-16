@@ -6,11 +6,13 @@ const Layout = ({
     children,
     type,
     setsearch,
-    search
+    search,
+    headerDetail
 }) => {
     return (
         <WrapperLayout>
             <Header
+                headerDetail={headerDetail}
                 type={type}></Header>
             {children}
         </WrapperLayout>

@@ -3,6 +3,7 @@ import {
     Routes,
     Route,
 } from "react-router-dom";
+import Detail from '../pages/detail';
 import Home from '../pages/home';
 
 const RouterApp = () => {
@@ -10,6 +11,7 @@ const RouterApp = () => {
         <>
             <Routes>
                 <Route path='/' element={<Home />} />
+                <Route path='/:id' element={<Detail />} />
             </Routes>
         </>
     )
