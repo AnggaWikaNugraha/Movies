@@ -7,6 +7,7 @@ import { actionSearch } from '../redux/action/movies'
 const Header = ({
     type,
     typeNavbar,
+    headerDetail
 }) => {
 
     const dispatch = useDispatch()
@@ -17,13 +18,15 @@ const Header = ({
         default:
             return (
                 <Navbar type={type}>
-                    {!type && <Brand><P>Movies</P></Brand>}
+                    {!type && <Brand><P>{headerDetail ? "Detail movie" : "Movies"}</P></Brand>}
                     <WrappSearch>
                         <Gap width={'10px'} />
-                        <Search search={stateMovies.params.search}>
-                            <ion-icon name="search-outline"></ion-icon>
-                            <Input onChange={(e) => dispatch(actionSearch(e.target.value))} placeholder='Cari Movies' />
-                        </Search>
+                        {headerDetail ? "" :
+                            <Search search={stateMovies.params.search}>
+                                <ion-icon name="search-outline"></ion-icon>
+                                <Input onChange={(e) => dispatch(actionSearch(e.target.value))} placeholder='Cari Movies' />
+                            </Search>
+                        }
                     </WrappSearch>
                 </Navbar>
             )
