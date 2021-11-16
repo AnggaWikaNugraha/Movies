@@ -1,4 +1,4 @@
-import { GET_MOVIE, GET_MOVIES, SEARCH_MOVIE } from '../type/movies';
+import { GET_MOVIE, GET_MOVIES, SEARCH_MOVIE, ERROR_GET_MOVIES } from '../type/movies';
 
 let initialState = {
     response: {
@@ -6,8 +6,8 @@ let initialState = {
         movie: {}
     },
     params: {
-        search: 'Batman',
-        page: 1
+        search: '',
+        page: 0
     }
 }
 
@@ -19,7 +19,17 @@ export default function reducerMovies(state = initialState, action) {
                 ...state,
                 response: {
                     ...state.response,
-                    movies: action.payload
+                    movies: [...state.response.movies, ...action.payload]
+                }
+            }
+
+        case ERROR_GET_MOVIES:
+            return {
+                ...state,
+                response: {
+                    ...state.response,
+                    movies: [],
+                    movie: {}
                 }
             }
 
