@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from '../layout/Layout'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionGetMovies } from '../redux/action/movies'
@@ -9,6 +9,7 @@ import { Gap } from '../GloblasStyles'
 const Home = () => {
     const dispatch = useDispatch()
     const stateMovies = useSelector(state => state.stateMovies)
+    const [noData, setnoData] = useState(true)
 
     React.useEffect(() => {
         dispatch(actionGetMovies(
@@ -16,6 +17,15 @@ const Home = () => {
             stateMovies.params.page
         ))
     }, [dispatch, stateMovies.params.search])
+
+    window.onscroll = () => {
+        // penting
+        if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.scrollHeight) {
+            if (noData) {
+                alert('tes')
+            }
+        }
+    }
 
     return (
         <Layout

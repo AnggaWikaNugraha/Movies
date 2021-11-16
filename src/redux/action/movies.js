@@ -1,10 +1,10 @@
 import { Movies } from '../api/movies'
 import { SEARCH_MOVIE, GET_MOVIE, GET_MOVIES, ERROR_GET_MOVIES } from '../type/movies'
 
-export const actionGetMovies = (type, page) => async (dispatch) => {
+export const actionGetMovies = (type, page) => async (dispatch, getState) => {
     try {
-
-        await Movies(type, page).then(res => {
+        const NewPage = getState().stateMovies.params.page + 1;
+        await Movies(type, NewPage).then(res => {
             if (res.data.Response == 'False') {
                 dispatch({
                     type: ERROR_GET_MOVIES,

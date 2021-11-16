@@ -7,7 +7,7 @@ let initialState = {
     },
     params: {
         search: '',
-        page: 1
+        page: 0
     }
 }
 
@@ -19,7 +19,7 @@ export default function reducerMovies(state = initialState, action) {
                 ...state,
                 response: {
                     ...state.response,
-                    movies: action.payload
+                    movies: [...state.response.movies, ...action.payload]
                 }
             }
 
