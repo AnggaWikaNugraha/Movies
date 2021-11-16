@@ -29,6 +29,9 @@ const Home = () => {
         }
     }
 
+    const [img, setimg] = useState('')
+    console.log(img)
+
     return (
         <Layout
             type={stateMovies.params.search ? '' : 'noValueSearch'
@@ -50,10 +53,28 @@ const Home = () => {
                                             return (
                                                 <WrapperCard className='col-md-2'>
                                                     <Card className='card'>
-                                                        <CardBody className='card-body'>
-                                                            <img src={res?.Poster} />
 
-                                                        </CardBody>
+                                                        <a onClick={() => setimg(res.Poster)} id='buttonModal' type="button" data-toggle="modal" data-target="#exampleModalCenter">
+                                                            <CardBody className='card-body'>
+                                                                <img src={res?.Poster} />
+
+                                                            </CardBody>
+                                                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header" style={{ backgroundColor: 'black' }}>
+                                                                            <div></div>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <Modal class="modal-body" style={{ backgroundColor: 'black' }}>
+                                                                            <img src={img} />
+                                                                        </Modal>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
                                                         <Link style={{
                                                             color: 'white',
                                                             position: 'absolute',
@@ -145,3 +166,9 @@ const WrapperNoFindMovies = styled.div`
     justify-content: center;
     align-items: center;
 `
+
+const Modal = styled.div`
+    padding : 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;`
