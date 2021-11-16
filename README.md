@@ -29,19 +29,13 @@ Go to project folder :
 > open http://localhost:3000 in your browser
 ```
 
-## Authors
-
-Contributors names and contact info
-
 ### Stack technology
 - ReactJS (CRA)
 - Css in Js using emotion
 - React-Redux (State Management)
-- context (State Management)
 - React-router-dom (Routing in React)
 - Omdbapi.com (Open API)
 - Axios (Http Request)
-- Unit testing Jest and RTL
 - React Hooks
 
 ### Features
@@ -50,5 +44,3 @@ Contributors names and contact info
 - Search movies by keyword
 - Single page for movie detail
 - Showing popup for cliecked movie poster
-- Autocomplete searching movie in input search header
-- Unit testing
