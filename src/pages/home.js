@@ -24,7 +24,7 @@ const Home = () => {
             type={stateMovies.params.search ? '' : 'noValueSearch'
             }>
             {!stateMovies.params.search && <OnBoard />}
-            {stateMovies.params.search &&
+            {stateMovies.response.movies.length > 0 ?
                 <>
                     <Container>
                         <WrappImage>
@@ -50,6 +50,9 @@ const Home = () => {
                         </WrappCard>
                     </Container>
                 </>
+                : <WrapperNoFindMovies>
+                    <TitleBanner fontWeight={700} fontSize={'5rem'}>Ga nemu film!</TitleBanner>
+                </WrapperNoFindMovies>
             }
 
         </Layout>
@@ -101,4 +104,12 @@ const CardBody = styled.div`
 const Card = styled.div`
     border-color: black;
     background-color: black;
+`
+
+const WrapperNoFindMovies = styled.div`
+    width: 100%;
+    height: 95vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
