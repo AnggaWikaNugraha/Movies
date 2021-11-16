@@ -1,9 +1,10 @@
 import React from 'react'
 import Layout from '../layout/Layout'
-import styled from '@emotion/styled'
-import { Gap } from '../GloblasStyles'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionGetMovies } from '../redux/action/movies'
+import OnBoard from '../components/OnBoard'
+import styled from '@emotion/styled'
+import { Gap } from '../GloblasStyles'
 
 const Home = () => {
     const dispatch = useDispatch()
@@ -14,36 +15,41 @@ const Home = () => {
             stateMovies.params.search,
             stateMovies.params.page
         ))
-    }, [dispatch])
+    }, [dispatch, stateMovies.params.search])
+
+    const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
     return (
         <Layout
             type={stateMovies.params.search ? '' : 'noValueSearch'
             }>
-
-            {!stateMovies.params.search &&
-                <Container backgroundColor='black'>
-                    <WrapperCard>
-                        <Gap height={'50px'} />
-                        <div className='row'>
-                            <div className='col-6'>
-                                <Card className='card'>
-                                    <div classNamecard-body>
-                                        <h1>Enjoy your TV</h1>
-                                        <p>orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
-                                    </div>
-                                </Card>
-                            </div>
-                            <div className='col-6'>
-                                <Card className='card'>
-                                    <div classNamecard-body>
-                                        <Image width={'350px'} src='https://images.unsplash.com/photo-1596405367208-63505402f113?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fHRlbGV2aXNpb258ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80' />
-                                    </div>
-                                </Card>
-                            </div>
-                        </div>
-                    </WrapperCard>
-                </Container>
+            {!stateMovies.params.search && <OnBoard />}
+            {stateMovies.params.search &&
+                <>
+                    <Container>
+                        <WrappImage>
+                            <Banner src={stateMovies.response.movies.length > 0 && stateMovies.response?.movies[0]?.Poster}></Banner>
+                            <TitleBanner fontWeight={700} fontSize={'5rem'}>{stateMovies?.params?.search}</TitleBanner>
+                            <TitleBanner top={'40%'} fontWeight={500} fontSize={'12px'}>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</TitleBanner>
+                        </WrappImage>
+                        <Gap height={'30px'} />
+                        <WrappCard className='row'>
+                            {
+                                stateMovies.response.movies.length > 0 && stateMovies.response.movies.map((res, key) => {
+                                    return (
+                                        <WrapperCard className='col-md-2'>
+                                            <Card className='card'>
+                                                <CardBody className='card-body'>
+                                                    <img src={res?.Poster} />
+                                                </CardBody>
+                                            </Card>
+                                        </WrapperCard>
+                                    )
+                                })
+                            }
+                        </WrappCard>
+                    </Container>
+                </>
             }
 
         </Layout>
@@ -53,25 +59,46 @@ const Home = () => {
 export default Home
 
 const Container = styled.div`
-    background-color: ${props => props.backgroundColor ? props.backgroundColor : 'white'};
     width: 100%;
-    height: 50vh;
-    padding: 0 300px 0 300px;
+    padding: 0 30px 0 30px;
 `
 
+const WrappImage = styled.div`
+    position: relative;
+    background-color: black;
+    width: 100%;
+    height: 500px;
+`
+
+const Banner = styled.img`
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    object-fit: cover;
+`
+
+const TitleBanner = styled.div`
+    position: absolute;
+    top: ${props => props.top ? props.top : '20%'};
+    left: ${props => props.left ? props.left : '10%'};
+    color: white;
+    font-size: ${props => props.fontSize ? props.fontSize : '0px'};
+    font-weight: ${props => props.fontWeight ? props.fontWeight : '500'};
+    width: 500px;
+`
+const WrappCard = styled.div`
+    padding-left : 13px; 
+    padding-right : 13px;
+`
 const WrapperCard = styled.div`
-    padding: 0 50px 0 50px;
+    padding:0;
+`
+const CardBody = styled.div`
+    border-radius : 0; 
+    padding:0;
 `
 
 const Card = styled.div`
-    padding: 20px;
-    color: white;
-    background-color: transparent;
-    display: flex;
-align-items: center;
-`
-
-const Image = styled.img`
-    width: ${props => props.width ? props.width : '0px'};
-    height: ${props => props.height ? props.height : 'opx'};
+    border-color: black;
+    background-color: black;
 `
