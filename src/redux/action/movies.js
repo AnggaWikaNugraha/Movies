@@ -1,9 +1,9 @@
 import { Movies } from '../api/movies'
-import { SEARCH_MOVIE, GET_MOVIE, GET_MOVIES, ERROR_GET_MOVIES } from '../type/movies'
+import { SEARCH_MOVIE, GET_MOVIE, GET_MOVIES, ERROR_GET_MOVIES, SET_PAGE, Error_SET_PAGE } from '../type/movies'
 
-export const actionGetMovies = (type, page) => async (dispatch, getState) => {
+export const actionGetMovies = (type) => async (dispatch, getState) => {
     try {
-        const NewPage = getState().stateMovies.params.page + 1;
+        const NewPage = getState().stateMovies.params.page;
         await Movies(type, NewPage).then(res => {
             if (res.data.Response == 'False') {
                 dispatch({
@@ -21,6 +21,25 @@ export const actionGetMovies = (type, page) => async (dispatch, getState) => {
     } catch (error) {
 
     }
+}
+
+export const actionSetPage = (page) => async (dispatch) => {
+
+    try {
+
+        dispatch({
+            type: SET_PAGE,
+            payload: page
+        })
+
+    } catch (error) {
+        if (error) {
+            dispatch({
+                type: Error_SET_PAGE
+            })
+        }
+    }
+
 }
 
 export const actionSearch = (search) => async (dispatch) => {

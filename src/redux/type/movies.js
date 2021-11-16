@@ -6,3 +6,6 @@ export const ERROR_SEARCH_MOVIE = 'error_search_movie';
 
 export const GET_MOVIE = 'get_movie';
 export const ERROR_GET_MOVIE = 'error_get_movie';
+
+export const SET_PAGE = 'set_page';
+export const Error_SET_PAGE = 'error_set_page';

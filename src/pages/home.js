@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Layout from '../layout/Layout'
 import { useDispatch, useSelector } from 'react-redux'
-import { actionGetMovies } from '../redux/action/movies'
+import { actionGetMovies, actionSetPage } from '../redux/action/movies'
 import OnBoard from '../components/OnBoard'
 import styled from '@emotion/styled'
 import { Gap } from '../GloblasStyles'
@@ -13,17 +13,18 @@ const Home = () => {
 
     React.useEffect(() => {
         dispatch(actionGetMovies(
-            stateMovies.params.search,
-            stateMovies.params.page
+            stateMovies.params.search
         ))
-    }, [dispatch, stateMovies.params.search])
+    }, [
+        dispatch,
+        stateMovies.params.search,
+        stateMovies.params.page
+    ])
 
     window.onscroll = () => {
         // penting
         if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.scrollHeight) {
-            if (noData) {
-                alert('tes')
-            }
+            dispatch(actionSetPage(stateMovies.params.page + 1))
         }
     }
 
