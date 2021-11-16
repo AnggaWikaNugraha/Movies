@@ -24,35 +24,41 @@ const Home = () => {
             type={stateMovies.params.search ? '' : 'noValueSearch'
             }>
             {!stateMovies.params.search && <OnBoard />}
-            {stateMovies.response.movies.length > 0 ?
+            {stateMovies.params.search &&
                 <>
-                    <Container>
-                        <WrappImage>
-                            <Banner src={stateMovies.response.movies.length > 0 && stateMovies.response?.movies[0]?.Poster}></Banner>
-                            <TitleBanner fontWeight={700} fontSize={'5rem'}>{stateMovies?.params?.search}</TitleBanner>
-                            <TitleBanner top={'40%'} fontWeight={500} fontSize={'12px'}>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</TitleBanner>
-                        </WrappImage>
-                        <Gap height={'30px'} />
-                        <WrappCard className='row'>
-                            {
-                                stateMovies.response.movies.length > 0 && stateMovies.response.movies.map((res, key) => {
-                                    return (
-                                        <WrapperCard className='col-md-2'>
-                                            <Card className='card'>
-                                                <CardBody className='card-body'>
-                                                    <img src={res?.Poster} />
-                                                </CardBody>
-                                            </Card>
-                                        </WrapperCard>
-                                    )
-                                })
-                            }
-                        </WrappCard>
-                    </Container>
+                    {
+                        stateMovies.response.movies.length > 0 ?
+                            <Container>
+                                <WrappImage>
+                                    <Banner src={stateMovies.response.movies.length > 0 && stateMovies.response?.movies[0]?.Poster}></Banner>
+                                    <TitleBanner fontWeight={700} fontSize={'5rem'}>{stateMovies?.params?.search}</TitleBanner>
+                                    <TitleBanner top={'40%'} fontWeight={500} fontSize={'12px'}>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</TitleBanner>
+                                </WrappImage>
+                                <Gap height={'30px'} />
+                                <WrappCard className='row'>
+                                    {
+                                        stateMovies.response.movies.length > 0 && stateMovies.response.movies.map((res, key) => {
+                                            return (
+                                                <WrapperCard className='col-md-2'>
+                                                    <Card className='card'>
+                                                        <CardBody className='card-body'>
+                                                            <img src={res?.Poster} />
+                                                        </CardBody>
+                                                    </Card>
+                                                </WrapperCard>
+                                            )
+                                        })
+                                    }
+                                </WrappCard>
+                            </Container>
+                            :
+                            <WrapperNoFindMovies>
+                                <TitleBanner fontWeight={700} fontSize={'5rem'}>Ga nemu film!</TitleBanner>
+                            </WrapperNoFindMovies>
+                    }
+
                 </>
-                : <WrapperNoFindMovies>
-                    <TitleBanner fontWeight={700} fontSize={'5rem'}>Ga nemu film!</TitleBanner>
-                </WrapperNoFindMovies>
+
             }
 
         </Layout>
