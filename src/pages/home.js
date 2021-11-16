@@ -50,11 +50,22 @@ const Home = () => {
                                             return (
                                                 <WrapperCard className='col-md-2'>
                                                     <Card className='card'>
-                                                        <Link to={`/detail/`, res.imdbID} state={res.imdbID}>
-                                                            <CardBody className='card-body'>
-                                                                <img src={res?.Poster} />
+                                                        <CardBody className='card-body'>
+                                                            <img src={res?.Poster} />
 
-                                                            </CardBody>
+                                                        </CardBody>
+                                                        <Link style={{
+                                                            color: 'white',
+                                                            position: 'absolute',
+                                                            bottom: '10px',
+                                                            textDecoration: 'none',
+                                                            left: '10px',
+                                                            fontSize: '18px',
+                                                            backgroundColor: 'red',
+                                                            padding: '3px 5px 3px 5px',
+                                                            borderRadius: '5px'
+                                                        }} to={`/detail/`, res.imdbID} state={res.imdbID}>
+                                                            Detail
                                                         </Link>
                                                     </Card>
                                                 </WrapperCard>
@@ -77,6 +88,10 @@ const Home = () => {
 }
 
 export default Home
+
+const Nav = styled.nav`
+    color: wheat;
+`
 
 const Container = styled.div`
     width: 100%;
