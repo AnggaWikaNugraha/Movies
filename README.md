@@ -2,6 +2,9 @@
 
 Simple React app for movies
 
+![image](https://user-images.githubusercontent.com/37723902/143259396-03245f74-02aa-4345-a921-6e6b6e264d4c.png)
+
+
 ## Getting Started
 
 ### Dependencies
